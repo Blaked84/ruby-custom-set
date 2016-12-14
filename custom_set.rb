@@ -47,11 +47,12 @@ class CustomSet
   end
 
   def difference(custom_set)
-    diff = CustomSet.new
-    @values.each do |val|
-      diff.add(val) unless custom_set.member? val
-    end
-    diff
+    CustomSet.new((@values.+(custom_set.values)).keep_if { |x| (self.member?(x) && !custom_set.member?(x)) || (!self.member?(x) && custom_set.member?(x))})
+    # diff = CustomSet.new
+    # @values.each do |val|
+    #   diff.add(val) unless custom_set.member? val
+    # end
+    # diff
   end
 
   def union2(custom_set)
